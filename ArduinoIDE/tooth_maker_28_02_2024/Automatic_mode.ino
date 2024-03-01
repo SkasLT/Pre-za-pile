@@ -25,6 +25,7 @@ void automatic_movement(){
       if (tool_pulses_left == 0) {
         wagon_pulses_left = number_of_wagon_motor_pulses;
         tool_pulses_left = TOOL_PULSES_FULL_TURN;
+        update_lcd();
       } else {
         long long delta = min(tool_pulses_left, 100);
         tool_pulses_left -= delta;

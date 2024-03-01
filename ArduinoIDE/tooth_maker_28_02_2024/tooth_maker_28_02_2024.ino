@@ -252,10 +252,12 @@ void determine_state_loop(){
     is_button_idle[MANUAL_AUTO] = false;
     if (current_mode == MANUAL_MODE) {
       current_mode = AUTOMATIC_MODE_IDLE;
+      step_counter = 0;
       update_lcd();
     } else{
       launch_idle_mode();
       current_mode = MANUAL_MODE;
+      step_counter = 0;
       update_lcd();
     }
   }
@@ -272,13 +274,15 @@ void determine_state_loop(){
   if (digitalRead(TOOL_SELECT) == LOW) {
     if (current_tool == TOOL_MOTOR) {
       current_tool_lcd = DEFAULT_PRESS_LCD;
+      current_tool = TOOL_PRESS;
+      update_lcd();
     }
-    current_tool = TOOL_PRESS;
   } else {
     if (current_tool == TOOL_PRESS) {
       current_tool_lcd = DEFAULT_MOTOR_LCD;
+      current_tool = TOOL_MOTOR;
+      update_lcd();
     }
-    current_tool = TOOL_MOTOR;
   }
 }
 
